@@ -18,6 +18,7 @@ class Person < Nameable
   def correct_name
     @name
   end
+
   private
 
   def of_age?
@@ -25,5 +26,5 @@ class Person < Nameable
   end
 end
 
-person = Person.new(22, name: 'maximilianus') 
+person = Person.new(22, name: 'maximilianus')
 puts "Original name: #{person.correct_name}"
