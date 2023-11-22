@@ -1,6 +1,6 @@
-require_relative 'nemeable'
+require_relative 'nameable'
 
-class Person < Nemeable
+class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
 
@@ -24,3 +24,6 @@ class Person < Nemeable
     @age >= 18
   end
 end
+
+person = Person.new(22, name: 'maximilianus') 
+puts "Original name: #{person.correct_name}"
