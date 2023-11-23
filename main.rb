@@ -16,7 +16,7 @@ capitalized_trimmed_person = TrimDecorator.new(capitalized_person)
 puts capitalized_trimmed_person.correct_name
 
 classroom_a = Classroom.new('Class A')
-person = Student.new(classroom_a, 17,  name: 'John Doe')
+person = Student.new(classroom_a, 17, name: 'John Doe')
 book = Book.new('Ruby Programming', 'John Smith')
 
 # Create a rental and associate it with the person and book

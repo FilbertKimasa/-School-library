@@ -11,7 +11,7 @@ class Student < Person
   end
 
   def class_name
-    @classroom&.label || "Not assigned to any class"
+    @classroom&.label || 'Not assigned to any class'
   end
 
   def play_hooky
