@@ -13,9 +13,9 @@ class Student < Person
     '¯\\(ツ)/¯'
   end
 
-  def set_classroom(classroom)
-    @classroom&.students&.delete(self) 
-    @classroom = classroom
-    classroom&.students&.push(self) 
+  def change_classroom(new_classroom)
+    @classroom&.students&.delete(self)
+    @classroom = new_classroom
+    new_classroom&.students&.push(self)
   end
 end
