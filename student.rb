@@ -17,4 +17,5 @@ class Student < Person
     @classroom&.students&.delete(self) 
     @classroom = classroom
     classroom&.students&.push(self) 
+  end
 end
