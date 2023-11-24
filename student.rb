@@ -19,5 +19,4 @@ class Student < Person
   def add_to_classroom(new_classroom)
     @classroom = new_classroom
   end
-
 end
