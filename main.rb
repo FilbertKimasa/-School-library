@@ -20,7 +20,6 @@ classroom_a = Classroom.new('Class A')
 person = Student.new(classroom_a, 17, name: 'John Doe')
 book = Book.new('Ruby Programming', 'John Smith')
 
-
 # Output information
 puts "Person: #{person.name}, Age: #{person.age}, Class: #{person.class_name}"
 puts "Book: #{book.title}, Author: #{book.author}"
@@ -31,7 +30,7 @@ book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
 
 # Create a rental and associate it with the person and book
 date = Date.new(2023, 12, 15)
-rental = Rental.new( date, book, person)
+Rental.new(date, book, person)
 
 # Accessing rentals for a person and a book
 puts "#{person.correct_name}'s Rentals:"
