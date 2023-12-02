@@ -32,13 +32,11 @@ class App
     when 1
       create_student
     when 2
-     create_teacher
+      create_teacher
     else
       puts 'Invalid Option'
     end
-   
   end
-
 
   def create_student
     print 'Enter Name: '
@@ -60,12 +58,11 @@ class App
     age = gets.chomp
     print 'Specialization: '
     specialization = gets.chomp
-    teacher = Teacher.new(specialization, age,  name: name)
+    teacher = Teacher.new(specialization, age, name: name)
     @people << teacher
     puts 'Person Created Successfully'
     puts ' '
   end
-
 
   def create_book(title, author)
     book = Book.new(title, author)
@@ -83,7 +80,7 @@ class App
     end
   end
 
- def all_people(show_index: false)
+  def all_people(show_index: false)
     if @people.empty?
       puts 'There are no people in the library'
     else
