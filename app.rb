@@ -13,7 +13,7 @@ class App
   end
 
   def list_people
-    puts "List of People:"
+    puts 'List of People:'
     @people.each { |person| puts "#{person.name} (ID: #{person.id})" }
   end
 
@@ -31,13 +31,13 @@ class App
     end
   end
 
-   def create_book(title, author)
+  def create_book(title, author)
     book = Book.new(title, author)
     @books << book
     puts "Book '#{book.title}' by #{book.author} created."
   end
 
-   def create_rental(person_id, book_title, due_date)
+  def create_rental(person_id, book_title, due_date)
     person = @people.find { |p| p.id == person_id }
     book = @books.find { |b| b.title == book_title }
 
@@ -46,19 +46,18 @@ class App
       @rentals << rental
       puts "Rental created: #{person.name} rented '#{book.title}' (Due Date: #{rental.due_date})"
     else
-      puts "Person or book not found. Please check the person ID and book title."
+      puts 'Person or book not found. Please check the person ID and book title.'
     end
   end
 
-   def list_rentals_for_person(person_id)
+  def list_rentals_for_person(person_id)
     person = @people.find { |p| p.id == person_id }
 
     if person
       puts "Rentals for #{person.name}:"
       person.rentals.each { |rental| puts "'#{rental.book.title}' - Due Date: #{rental.due_date}" }
     else
-      puts "Person not found. Please check the person ID."
+      puts 'Person not found. Please check the person ID.'
     end
   end
-
 end
