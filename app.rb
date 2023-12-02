@@ -1,18 +1,17 @@
-# require 'date'
 require_relative 'person'
 require_relative 'student'
+require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
 require_relative 'classroom'
 
 class App
-  attr_accessor :people, :books, :rentals
+  attr_accessor :people, :books, :rentals, :classrooms
 
   def initialize
     @people = []
     @books = []
     @rentals = []
-    classroom = Classroom.new('Math Class')
   end
 
   def list_books
@@ -27,11 +26,11 @@ class App
 
   def create_person(name, age, type)
     if type == 'teacher'
-      teacher = Teacher.new(name, age)
+      teacher = Teacher.new(nil, age, name: name)
       @people << teacher
       puts "#{teacher.name} (Teacher) created with ID: #{teacher.id}"
     elsif type == 'student'
-      student = Student.new(classroom, name, age)
+      student = Student.new(nil, age, name: name)
       @people << student
       puts "#{student.name} (Student) created with ID: #{student.id}"
     else
@@ -58,11 +57,6 @@ class App
     end
   end
 
-   def create_classroom(name)
-    classroom = Classroom.new(name)
-    @classrooms << classroom
-    puts "Classroom '#{classroom.name}' created."
-  end
 
   def list_rentals_for_person(person_id)
     person = @people.find { |p| p.id == person_id }
