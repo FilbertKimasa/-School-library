@@ -1,3 +1,7 @@
+require_relative 'person'
+require_relative 'book'
+require_relative 'rental'
+
 class App
   attr_accessor :people, :books, :rentals
 
