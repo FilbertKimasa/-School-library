@@ -1,6 +1,9 @@
+# require 'date'
 require_relative 'person'
+require_relative 'student'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'classroom'
 
 class App
   attr_accessor :people, :books, :rentals
@@ -9,6 +12,7 @@ class App
     @people = []
     @books = []
     @rentals = []
+    classroom = Classroom.new('Math Class')
   end
 
   def list_books
@@ -27,7 +31,7 @@ class App
       @people << teacher
       puts "#{teacher.name} (Teacher) created with ID: #{teacher.id}"
     elsif type == 'student'
-      student = Student.new(name, age)
+      student = Student.new(classroom, name, age)
       @people << student
       puts "#{student.name} (Student) created with ID: #{student.id}"
     else
@@ -48,10 +52,16 @@ class App
     if person && book
       rental = Rental.new(due_date, book, person)
       @rentals << rental
-      puts "Rental created: #{person.name} rented '#{book.title}' (Due Date: #{rental.due_date})"
+      puts "Rental created: #{person.name} rented '#{book.title}' (Due Date: #{rental.date})"
     else
       puts 'Person or book not found. Please check the person ID and book title.'
     end
+  end
+
+   def create_classroom(name)
+    classroom = Classroom.new(name)
+    @classrooms << classroom
+    puts "Classroom '#{classroom.name}' created."
   end
 
   def list_rentals_for_person(person_id)
@@ -59,7 +69,7 @@ class App
 
     if person
       puts "Rentals for #{person.name}:"
-      person.rentals.each { |rental| puts "'#{rental.book.title}' - Due Date: #{rental.due_date}" }
+      person.rentals.each { |rental| puts "'#{rental.book.title}' - Due Date: #{rental.date}" }
     else
       puts 'Person not found. Please check the person ID.'
     end
