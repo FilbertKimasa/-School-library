@@ -11,4 +11,9 @@ class App
     puts 'List of Books:'
     @books.each { |book| puts "#{book.title} by #{book.author}" }
   end
+
+  def list_people
+    puts "List of People:"
+    @people.each { |person| puts "#{person.name} (ID: #{person.id})" }
+  end
 end
