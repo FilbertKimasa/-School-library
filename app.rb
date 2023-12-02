@@ -37,4 +37,17 @@ class App
     puts "Book '#{book.title}' by #{book.author} created."
   end
 
+   def create_rental(person_id, book_title, due_date)
+    person = @people.find { |p| p.id == person_id }
+    book = @books.find { |b| b.title == book_title }
+
+    if person && book
+      rental = Rental.new(due_date, book, person)
+      @rentals << rental
+      puts "Rental created: #{person.name} rented '#{book.title}' (Due Date: #{rental.due_date})"
+    else
+      puts "Person or book not found. Please check the person ID and book title."
+    end
+  end
+
 end
