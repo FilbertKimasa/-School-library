@@ -1,3 +1,14 @@
-class App 
-     attr_accessor :people, :books, :rentals
-end 
+class App
+  attr_accessor :people, :books, :rentals
+
+  def initialize
+    @people = []
+    @books = []
+    @rentals = []
+  end
+
+  def list_books
+    puts 'List of Books:'
+    @books.each { |book| puts "#{book.title} by #{book.author}" }
+  end
+end
