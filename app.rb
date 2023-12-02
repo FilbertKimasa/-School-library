@@ -30,4 +30,11 @@ class App
       puts "Invalid person type. Please specify 'teacher' or 'student'."
     end
   end
+
+   def create_book(title, author)
+    book = Book.new(title, author)
+    @books << book
+    puts "Book '#{book.title}' by #{book.author} created."
+  end
+
 end
