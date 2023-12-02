@@ -57,7 +57,6 @@ class App
     end
   end
 
-
   def list_rentals_for_person(person_id)
     person = @people.find { |p| p.id == person_id }
 
