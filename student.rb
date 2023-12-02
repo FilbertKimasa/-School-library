@@ -16,7 +16,10 @@ class Student < Person
     '¯\\(ツ)/¯'
   end
 
-  def add_to_classroom(new_classroom)
-    @classroom = new_classroom
+ def classroom=(classroom)
+    @classroom&.students&.delete(self)
+    @classroom = classroom
+    classroom.students.push(self) unless classroom.students.include?(self)
   end
+  
 end
