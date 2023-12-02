@@ -16,4 +16,18 @@ class App
     puts "List of People:"
     @people.each { |person| puts "#{person.name} (ID: #{person.id})" }
   end
+
+  def create_person(name, age, type)
+    if type == 'teacher'
+      teacher = Teacher.new(name, age)
+      @people << teacher
+      puts "#{teacher.name} (Teacher) created with ID: #{teacher.id}"
+    elsif type == 'student'
+      student = Student.new(name, age)
+      @people << student
+      puts "#{student.name} (Student) created with ID: #{student.id}"
+    else
+      puts "Invalid person type. Please specify 'teacher' or 'student'."
+    end
+  end
 end
