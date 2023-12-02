@@ -1,40 +1,75 @@
-require 'date'
-require_relative 'person'
-require_relative 'book'
-require_relative 'rental'
-require_relative 'student'
-require_relative 'classroom'
-require_relative 'capitalize_decorator'
-require_relative 'trim_decorator'
+require_relative 'app'
 
-person = Person.new(22, name: 'maximilianus')
-puts person.correct_name
+def main
+  app = App.new
 
-# Appliying decorators
-capitalized_person = CapitalizeDecorator.new(person)
-puts capitalized_person.correct_name
-capitalized_trimmed_person = TrimDecorator.new(capitalized_person)
-puts capitalized_trimmed_person.correct_name
+  loop do
+    display_menu
+    choice = take_user_choice
+    break if process_user_choice(app, choice) == :quit
+  end
+end
 
-classroom_a = Classroom.new('Class A')
-person = Student.new(classroom_a, 17, name: 'John Doe')
-book = Book.new('Ruby Programming', 'John Smith')
+def process_user_choice(app, choice)
+  choices = {
+    1 => -> { app.list_books },
+    2 => -> { app.list_people },
+    3 => -> { create_person(app) },
+    4 => -> { create_book(app) },
+    5 => -> { create_rental(app) },
+    6 => -> { list_rentals_for_person(app) },
+    7 => -> { quit_application },
+    :default => -> { invalid_choice }
+  }
 
-# Output information
-puts "Person: #{person.name}, Age: #{person.age}, Class: #{person.class_name}"
-puts "Book: #{book.title}, Author: #{book.author}"
+  choices.fetch(choice, choices[:default]).call
+end
 
-# Creating instances of Person and Book
-person = Person.new(25, name: 'John')
-book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+def quit_application
+  puts 'Thank you for using this app!'
+  :quit
+end
 
-# Create a rental and associate it with the person and book
-date = Date.new(2023, 12, 15)
-Rental.new(date, book, person)
+def invalid_choice
+  puts 'Invalid choice. Please enter a number between 1 and 7.'
+end
 
-# Accessing rentals for a person and a book
-puts "#{person.correct_name}'s Rentals:"
-person.rentals.each { |rental| puts "#{rental.book.title} - Due Date: #{rental.date}" }
+def display_menu
+  puts "\n===== Library Management System ====="
+  puts '1 - List all books'
+  puts '2 - List all people'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
+  puts '7 - Exit'
+  print 'Enter your choice: '
+end
 
-puts "\n#{book.title}'s Rentals:"
-book.rentals.each { |rental| puts "#{rental.person.correct_name} - Due Date: #{rental.date}" }
+def take_user_choice
+  gets.chomp.to_i
+end
+
+def create_person(app)
+  app.create_person
+end
+
+def create_book(app)
+  print 'Enter book title: '
+  title = gets.chomp
+  print 'Enter book author: '
+  author = gets.chomp
+  app.create_book(title, author)
+end
+
+def create_rental(app)
+  app.create_rental
+end
+
+def list_rentals_for_person(app)
+  print 'Enter person ID: '
+  person_id = gets.chomp.to_i
+  app.list_rentals_for_person(person_id)
+end
+
+main
