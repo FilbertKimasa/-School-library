@@ -8,22 +8,30 @@ def main
     choice = take_user_choice
     break if process_user_choice(app, choice) == :quit
   end
-
-  puts 'Exiting the Library Management System. Goodbye!'
 end
 
 def process_user_choice(app, choice)
-  case choice
-  when 1 then app.list_books
-  when 2 then app.list_people
-  when 3 then create_person(app)
-  when 4 then create_book(app)
-  when 5 then create_rental(app)
-  when 6 then list_rentals_for_person(app)
-  when 7 then :quit
-  else
-    puts 'Invalid choice. Please enter a number between 1 and 7.'
-  end
+  choices = {
+    1 => -> { app.list_books },
+    2 => -> { app.list_people },
+    3 => -> { create_person(app) },
+    4 => -> { create_book(app) },
+    5 => -> { create_rental(app) },
+    6 => -> { list_rentals_for_person(app) },
+    7 => -> { quit_application },
+    :default => -> { invalid_choice }
+  }
+
+  choices.fetch(choice, choices[:default]).call
+end
+
+def quit_application
+  puts 'Exiting the Library Management System. Goodbye!'
+  :quit
+end
+
+def invalid_choice
+  puts 'Invalid choice. Please enter a number between 1 and 7.'
 end
 
 def display_menu
