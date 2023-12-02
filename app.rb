@@ -50,4 +50,15 @@ class App
     end
   end
 
+   def list_rentals_for_person(person_id)
+    person = @people.find { |p| p.id == person_id }
+
+    if person
+      puts "Rentals for #{person.name}:"
+      person.rentals.each { |rental| puts "'#{rental.book.title}' - Due Date: #{rental.due_date}" }
+    else
+      puts "Person not found. Please check the person ID."
+    end
+  end
+
 end
