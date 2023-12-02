@@ -6,20 +6,23 @@ def main
   loop do
     display_menu
     choice = take_user_choice
+    break if process_user_choice(app, choice) == :quit
+  end
 
-    case choice
-    when 1 then app.list_books
-    when 2 then app.list_people
-    when 3 then create_person(app)
-    when 4 then create_book(app)
-    when 5 then create_rental(app)
-    when 6 then list_rentals_for_person(app)
-    when 7
-      puts 'Exiting the Library Management System. Goodbye!'
-      break
-    else
-      puts 'Invalid choice. Please enter a number between 1 and 7.'
-    end
+  puts 'Exiting the Library Management System. Goodbye!'
+end
+
+def process_user_choice(app, choice)
+  case choice
+  when 1 then app.list_books
+  when 2 then app.list_people
+  when 3 then create_person(app)
+  when 4 then create_book(app)
+  when 5 then create_rental(app)
+  when 6 then list_rentals_for_person(app)
+  when 7 then :quit
+  else
+    puts 'Invalid choice. Please enter a number between 1 and 7.'
   end
 end
 
